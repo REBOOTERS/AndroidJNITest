@@ -1,0 +1,72 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "D:\\workspace\\CplusplusLite",
+      "sdkFolder": "D:\\Android\\SDK",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "D:\\workspace\\CplusplusLite\\app\\build\\intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "D:\\workspace\\CplusplusLite\\app",
+      "makeFile": "D:\\workspace\\CplusplusLite\\app\\src\\main\\cpp\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "D:\\workspace\\CplusplusLite\\.cxx",
+      "cxxFolder": "D:\\workspace\\CplusplusLite\\app\\.cxx",
+      "ndkFolder": "D:\\Android\\SDK\\ndk\\20.0.5594570",
+      "ndkVersion": "20.0.5594570",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [
+      ""
+    ],
+    "variantName": "release",
+    "soFolder": "D:\\workspace\\CplusplusLite\\app\\build\\intermediates\\cmake\\release\\lib",
+    "objFolder": "D:\\workspace\\CplusplusLite\\app\\build\\intermediates\\cmake\\release\\obj",
+    "jsonFolder": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release",
+    "gradleBuildOutputFolder": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARM64_V8A",
+  "abiPlatformVersion": 21,
+  "cxxBuildFolder": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a",
+  "jsonFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a\\android_gradle_build.json",
+  "gradleBuildOutputFolder": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a",
+  "objFolder": "D:\\workspace\\CplusplusLite\\app\\build\\intermediates\\cmake\\release\\obj\\arm64-v8a",
+  "buildCommandFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a\\build_command.txt",
+  "buildOutputFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a\\build_output.txt",
+  "modelOutputFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a\\build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\CMakeLists.txt",
+    "toolchainWrapperFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\build_generation_state.json",
+    "cacheKeyFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_cache_key.json",
+    "compilerCacheUseFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_cache_use.json",
+    "compilerCacheWriteFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cxx\\release\\arm64-v8a\\compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a\\json_generation_record.json",
+  "compileCommandsJsonFile": "D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\arm64-v8a\\compile_commands.json"
+}
