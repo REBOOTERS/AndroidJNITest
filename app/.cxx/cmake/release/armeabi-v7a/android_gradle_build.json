@@ -1,0 +1,42 @@
+{
+  "stringTable": {
+    "0": "D:/workspace/CplusplusLite/app/.cxx/cmake/release/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=D:/Android/SDK/ndk/20.0.5594570/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Android/SDK/ndk/20.0.5594570/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dnative_lib_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -Oz -DNDEBUG -fPIC"
+  },
+  "buildFiles": [
+    "D:\\Android\\SDK\\ndk\\20.0.5594570\\build\\cmake\\android.toolchain.cmake",
+    "D:\\workspace\\CplusplusLite\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "D:\\Android\\SDK\\ndk\\20.0.5594570\\build\\cmake\\platforms.cmake"
+  ],
+  "cleanCommands": [
+    "D:\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "D:\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native-lib-Release-armeabi-v7a": {
+      "buildCommand": "D:\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\workspace\\CplusplusLite\\app\\.cxx\\cmake\\release\\armeabi-v7a\" native-lib",
+      "buildType": "release",
+      "toolchain": "2043888824",
+      "abi": "armeabi-v7a",
+      "artifactName": "native-lib",
+      "files": [
+        {
+          "src": "D:\\workspace\\CplusplusLite\\app\\src\\main\\cpp\\native-lib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "D:\\workspace\\CplusplusLite\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a\\libnative-lib.so"
+    }
+  },
+  "toolchains": {
+    "2043888824": {
+      "cppCompilerExecutable": "D:\\Android\\SDK\\ndk\\20.0.5594570\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
