@@ -18,7 +18,9 @@ import com.vanniktech.rxpermission.RxPermission;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -50,14 +52,18 @@ public class MainActivity extends AppCompatActivity {
                         .subscribe(permission -> {
                             if (permission.state() == Permission.State.GRANTED) {
                                 String path = Environment.getExternalStorageDirectory() + "/gif/";
-                                final ArrayList<File> lists = new ArrayList<>();
+                                final List<File> lists = new ArrayList<>();
                                 File file = new File(path);
                                 if (file.exists() && file.isDirectory()) {
                                     File[] files = file.listFiles();
                                     for (File file1 : files) {
                                         lists.add(file1);
                                     }
-                                    lists.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+                                    Collections.sort(lists, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+                                }
+
+                                for (File list : lists) {
+                                    System.out.println(list.getName());
                                 }
 
                                 String path1 = Environment.getExternalStorageDirectory() + File.separator + "test.gif";
