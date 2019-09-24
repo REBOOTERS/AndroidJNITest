@@ -1,29 +1,9 @@
 package com.engineer.cpluspluslite
 
-import androidx.appcompat.app.AppCompatActivity
-
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-
-import com.bumptech.glide.Glide
-import com.vanniktech.rxpermission.Permission
-import com.vanniktech.rxpermission.RealRxPermission
-import com.vanniktech.rxpermission.RxPermission
-
-import java.io.File
-import java.util.ArrayList
-import java.util.Collections
-import java.util.Comparator
-
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

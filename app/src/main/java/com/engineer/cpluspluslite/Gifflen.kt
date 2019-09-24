@@ -34,12 +34,13 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 
-/**
- * Created by lchad on 2017/3/24.
- * Github : https://www.github.com/lchad
- */
 
-class Gifflen private constructor(private val mColor: Int, private val mQuality: Int, private val mDelay: Int, private val mWidth: Int, private val mHeight: Int, private val mOnEncodeFinishListener: OnEncodeFinishListener?) {
+class Gifflen private constructor(private val mColor: Int,
+                                  private val mQuality: Int,
+                                  private val mDelay: Int,
+                                  private val mWidth: Int,
+                                  private val mHeight: Int,
+                                  private val mOnEncodeFinishListener: OnEncodeFinishListener?) {
 
     private var mTargetPath: String? = null
 
@@ -445,6 +446,7 @@ class Gifflen private constructor(private val mColor: Int, private val mQuality:
         }
     }
 
+    @FunctionalInterface
     interface OnEncodeFinishListener {
         fun onEncodeFinish(path: String?)
     }
