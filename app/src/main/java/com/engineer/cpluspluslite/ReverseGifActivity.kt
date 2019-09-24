@@ -28,6 +28,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_reverse_gif.*
 import kotlinx.android.synthetic.main.activity_reverse_gif.go
+import kotlinx.android.synthetic.main.image_container.*
 import java.io.File
 
 class ReverseGifActivity : AppCompatActivity() {
@@ -98,7 +99,7 @@ class ReverseGifActivity : AppCompatActivity() {
 
 
     private fun doRevert(source: String?) {
-
+        Glide.with(mContext).load(source).into(original)
         if (useNative) {
             withNativeRevert(source)
         } else {
@@ -126,9 +127,10 @@ class ReverseGifActivity : AppCompatActivity() {
 
                     Glide.with(mContext).load(it).into(reversed)
                     // 原图和反转图同时加载，看看效果
-                    Glide.with(mContext).load(source).into(original)
                 }, {
                     it.printStackTrace()
+                    loading.visibility = View.GONE
+                    timer.stop()
                 })
     }
 
@@ -155,7 +157,11 @@ class ReverseGifActivity : AppCompatActivity() {
                             })
                             .build()
                     gifflen.encode(dest, lists)
-                }, { it.printStackTrace() })
+                }, {
+                    it.printStackTrace()
+                    loading.visibility = View.GONE
+                    timer.stop()
+                })
     }
 
 
