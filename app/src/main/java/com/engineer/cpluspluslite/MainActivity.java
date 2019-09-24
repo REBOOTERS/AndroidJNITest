@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Context mContext;
+    private boolean mHasPermission;
 
     @SuppressLint("CheckResult")
     @Override
@@ -46,35 +47,57 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(stringFromJNI());
         ImageView imageView = findViewById(R.id.image);
 
-        findViewById(R.id.go).setOnClickListener(v ->
-                RealRxPermission.getInstance(mContext).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(permission -> {
-                            if (permission.state() == Permission.State.GRANTED) {
-                                String path = Environment.getExternalStorageDirectory() + "/gif/";
-                                final List<File> lists = new ArrayList<>();
-                                File file = new File(path);
-                                if (file.exists() && file.isDirectory()) {
-                                    File[] files = file.listFiles();
-                                    for (File file1 : files) {
-                                        lists.add(file1);
-                                    }
-                                    Collections.sort(lists, (o1, o2) -> o1.getName().compareTo(o2.getName()));
-                                }
+        findViewById(R.id.go).setOnClickListener(v -> {
 
-                                for (File list : lists) {
-                                    System.out.println(list.getName());
-                                }
+            if (mHasPermission) {
+                String path = Environment.getExternalStorageDirectory() + "/gif/";
+                final List<File> lists = new ArrayList<>();
+                File file = new File(path);
+                if (file.exists() && file.isDirectory()) {
+                    File[] files = file.listFiles();
+                    if (files != null) {
+                        Collections.addAll(lists, files);
+                        Collections.sort(lists, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+                    }else {
+                        return;
+                    }
+                } else {
+                    return;
+                }
 
-                                String path1 = Environment.getExternalStorageDirectory() + File.separator + "test.gif";
+                for (File list : lists) {
+                    System.out.println(list.getName());
+                }
 
-                                Gifflen gifflen = new Gifflen.Builder()
-                                        .listener(path11 -> {
-                                            Glide.with(mContext).load(path11).into(imageView);
-                                        }).build();
-                                gifflen.encode(path1, lists);
-                            }
-                        }, throwable -> throwable.printStackTrace()));
+                String dest = Environment.getExternalStorageDirectory() + File.separator + "test.gif";
+
+                Gifflen gifflen = new Gifflen.Builder()
+                        .listener(p ->
+                                Glide.with(mContext)
+                                        .load(p)
+                                        .into(imageView))
+                        .build();
+                gifflen.encode(dest, lists);
+            }else {
+                requestPermission();
+            }
+
+
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestPermission();
+    }
+
+
+    @SuppressLint("CheckResult")
+    private void requestPermission() {
+        RealRxPermission.getInstance(mContext).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(permission ->
+                        mHasPermission = permission.state() == Permission.State.GRANTED);
     }
 
     /**
