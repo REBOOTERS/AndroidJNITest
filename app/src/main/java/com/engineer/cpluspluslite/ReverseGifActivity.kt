@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
+import android.os.Debug
 import android.os.Environment
 import android.os.SystemClock
 import android.util.Log
@@ -99,7 +100,7 @@ class ReverseGifActivity : AppCompatActivity() {
     }
 
 
-    private fun doRevert(source: String?) {
+    private fun doRevert(source: Uri?) {
         Glide.with(mContext).load(source).into(original)
         if (useNative) {
             withNativeRevert(source)
@@ -115,27 +116,28 @@ class ReverseGifActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("CheckResult")
-    private fun withJavaRevert(source: String?) {
+    @SuppressLint("CheckResult", "SetTextI18n")
+    private fun withJavaRevert(source: Uri?) {
         GifFactory.getReverseRes(mContext, source)
                 .subscribe({
                     loading.visibility = View.GONE
 
-                    originalUrl = Uri.parse(source)
+                    originalUrl = source
                     revertedlUrl = Uri.parse(it)
                     result.text = "图片保存在 :$it"
                     timer.stop()
 
                     Glide.with(mContext).load(it).into(reversed)
                 }, {
-                    it.printStackTrace()
+                    Log.e("gif", it?.message ?: "")
+                    Toast.makeText(mContext, it.message, Toast.LENGTH_SHORT).show()
                     loading.visibility = View.GONE
                     timer.stop()
                 })
     }
 
     @SuppressLint("CheckResult")
-    private fun withNativeRevert(source: String?) {
+    private fun withNativeRevert(source: Uri?) {
         FramesFactory.getReverseFrames(mContext, source)
                 .map {
                     val lists = ArrayList<File>()
@@ -204,8 +206,9 @@ class ReverseGifActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == GIF_REQUEST_CODE) {
             val result = Matisse.obtainPathResult(data)[0]
+            val uri = Matisse.obtainResult(data)[0]
             if (result.endsWith(".gif")) {
-                doRevert(result)
+                doRevert(uri)
             } else {
                 Toast.makeText(this, "not gif", Toast.LENGTH_SHORT).show()
             }
@@ -215,7 +218,7 @@ class ReverseGifActivity : AppCompatActivity() {
 
     // <editor-fold defaultstate="collapsed" desc="revert drawable">
     @SuppressLint("CheckResult")
-    private fun doRevert(source: Int?) {
+    private fun doInternalRevert(source: Int?) {
         loading.visibility = View.VISIBLE
         GifFactory.getReverseRes(mContext, source)
                 .subscribe({
