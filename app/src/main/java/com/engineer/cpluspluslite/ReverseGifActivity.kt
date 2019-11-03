@@ -46,10 +46,6 @@ class ReverseGifActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
-        window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         setContentView(R.layout.activity_reverse_gif)
         start.setOnClickListener { selectGif(false) }
         go.setOnClickListener { selectGif(true) }
@@ -60,7 +56,7 @@ class ReverseGifActivity : AppCompatActivity() {
                         .addStream(originalUrl)
                         .addStream(revertedlUrl)
                         .setText("反转 gif")
-                        .setType("text/richtext")
+                        .setType("image/gif")
                         .createChooserIntent()
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT
                                 or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
@@ -69,6 +65,16 @@ class ReverseGifActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "请选择图片先，😁", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        file.setOnClickListener {
+            val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/gif"
+//            intent.data = Uri.fromFile(path)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
 
 //        Glide.with(this).load(R.drawable.haha).into(original)
@@ -102,6 +108,8 @@ class ReverseGifActivity : AppCompatActivity() {
 
     private fun doRevert(source: Uri?) {
         Glide.with(mContext).load(source).into(original)
+//        Glide.with(mContext).load("").into(reversed)
+        reversed.setImageBitmap(null)
         if (useNative) {
             withNativeRevert(source)
         } else {
