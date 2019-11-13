@@ -21,35 +21,22 @@ import java.util.Collections.reverse
  * @author rookie
  * @since 07-06-2019
  */
-const val TAG = "GifFactory"
 
-internal object _GifFactory :_BaseGifFactory(){
-
+internal object _GifFactory2 : _BaseGifFactory() {
+    
     override fun genGifByFrames(context: Context, frames: List<ResFrame>): String {
         val t1 = TaskTime()
-
-        val os = ByteArrayOutputStream()
-        val encoder = AnimatedGifEncoder()
-        encoder.start(os)
-        encoder.setRepeat(0)
+        val path = IOTool.provideRandomPath("test")
+        val os = FileOutputStream(File(path))
+        val animatedGIFWriter = AnimatedGIFWriter()
+        animatedGIFWriter.prepareForWrite(os, -1, -1)
         for (value in frames) {
             val bitmap = BitmapFactory.decodeFile(value.path)
-            encoder.setDelay(value.delay)
-            val t2 = TaskTime()
-            encoder.addFrame(bitmap)
-            t2.release("addFrame")
-            Log.e("GifFactory", frames.indexOf(value).toString())
-            bitmap.recycle()
+            animatedGIFWriter.writeFrame(os, bitmap, value.delay)
         }
-        val t3 = TaskTime()
-        encoder.finish()
-        t3.release("finish")
-
-        val path = IOTool.saveStreamToSDCard("test", os)
-        os.close()
-        t1.release("genGifByFrames")
+        animatedGIFWriter.finishWrite(os)
+        t1.release("genGifByFramesWithGPU")
         IOTool.notifySystemGallery(context, path)
-        log(path)
         return path
     }
 

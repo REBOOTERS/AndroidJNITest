@@ -78,4 +78,17 @@ internal object IOTool {
         intent.data = uri
         context.sendBroadcast(intent)
     }
+
+    fun provideRandomPath(name: String): String {
+        val picturesDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val path = picturesDir.absolutePath + gifDir
+        val fileDir = File(path)
+        if (fileDir.exists().not()) {
+            fileDir.mkdir()
+        }
+        val fileName = name + System.currentTimeMillis() + ".gif"
+        val file = File(fileDir, fileName)
+        return file.absolutePath
+    }
 }

@@ -3,7 +3,7 @@ package com.engineer.gif.revert.util
 import android.graphics.BitmapFactory
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 09-24-2019
  */
 object BitmapTool {

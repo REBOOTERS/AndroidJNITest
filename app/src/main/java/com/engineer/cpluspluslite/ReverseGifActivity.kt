@@ -8,18 +8,17 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
-import android.os.Debug
 import android.os.Environment
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import com.bumptech.glide.Glide
 import com.engineer.gif.revert.FramesFactory
 import com.engineer.gif.revert.GifFactory
+import com.engineer.gif.revert.GifFactory2
 import com.engineer.gif.revert.util.BitmapTool
 import com.vanniktech.rxpermission.Permission
 import com.vanniktech.rxpermission.RealRxPermission
@@ -43,12 +42,14 @@ class ReverseGifActivity : AppCompatActivity() {
     private var originalUrl: Uri? = null
     private var revertedlUrl: Uri? = null
     private var useNative = false
+    protected var type = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
         setContentView(R.layout.activity_reverse_gif)
-        start.setOnClickListener { selectGif(false) }
-        go.setOnClickListener { selectGif(true) }
+        start.setOnClickListener { selectGif(false, 1) }
+        start2.setOnClickListener { selectGif(false, 0) }
+        go.setOnClickListener { selectGif(true, 0) }
 
         share.setOnClickListener {
             if (originalUrl != null && revertedlUrl != null) {
@@ -85,11 +86,12 @@ class ReverseGifActivity : AppCompatActivity() {
     // </editor-fold>
 
     @SuppressLint("CheckResult")
-    private fun selectGif(useNative: Boolean) {
+    private fun selectGif(useNative: Boolean, i: Int) {
         if (!mHasPermission) {
             return
         }
         this.useNative = useNative
+        this.type = i
         Matisse.from(this)
                 .choose(MimeType.of(MimeType.GIF))
                 .showSingleMediaType(true)
@@ -112,8 +114,10 @@ class ReverseGifActivity : AppCompatActivity() {
         reversed.setImageBitmap(null)
         if (useNative) {
             withNativeRevert(source)
-        } else {
+        } else if (type == 0) {
             withJavaRevert(source)
+        } else {
+            withFastRevert(source)
         }
 
         loading.visibility = View.VISIBLE
@@ -122,6 +126,26 @@ class ReverseGifActivity : AppCompatActivity() {
         timer.start()
 
 
+    }
+
+    @SuppressLint("CheckResult", "SetTextI18n")
+    private fun withFastRevert(source: Uri?) {
+        GifFactory2.getReverseRes(mContext, source)
+                .subscribe({
+                    loading.visibility = View.GONE
+
+                    originalUrl = source
+                    revertedlUrl = Uri.parse(it)
+                    result.text = "图片保存在 :$it"
+                    timer.stop()
+
+                    Glide.with(mContext).load(it).into(reversed)
+                }, {
+                    Log.e("gif", it?.message ?: "")
+                    Toast.makeText(mContext, it.message, Toast.LENGTH_SHORT).show()
+                    loading.visibility = View.GONE
+                    timer.stop()
+                })
     }
 
     @SuppressLint("CheckResult", "SetTextI18n")
