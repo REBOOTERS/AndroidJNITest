@@ -1,5 +1,6 @@
 package com.engineer.gif.revert.internal
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import com.bumptech.glide.gifdecoder.GifDecoder
@@ -16,6 +17,7 @@ import kotlin.collections.ArrayList
  * @author rookie
  * @since 11-12-2019
  */
+const val TAG = "GifFactory"
 abstract class BaseInnerGifFactory {
     fun getTaskResult(context: Context, task: FutureTarget<GifDrawable>): Observable<String> {
 
@@ -46,7 +48,6 @@ abstract class BaseInnerGifFactory {
 
 
     private fun getResourceFrames(resource: GifDrawable, context: Context): List<ResFrame> {
-        val t1 = TaskTime()
         val frames = ArrayList<ResFrame>()
         val decoder = getGifDecoder(resource)
         if (decoder != null) {
@@ -54,13 +55,11 @@ abstract class BaseInnerGifFactory {
             for (i in 0..resource.frameCount) {
                 val bitmap = decoder.nextFrame
                 val path = IOTool.saveBitmap2Box(context, bitmap, "pic_$i")
-//                log(path)
                 val frame = ResFrame(decoder.getDelay(i), path)
                 frames.add(frame)
                 decoder.advance()
             }
         }
-        t1.release("getResourceFrames")
         return frames
     }
 

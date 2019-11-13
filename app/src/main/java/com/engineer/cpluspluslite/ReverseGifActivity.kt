@@ -81,7 +81,7 @@ class ReverseGifActivity : AppCompatActivity() {
 //        Glide.with(this).load(R.drawable.haha).into(original)
 //        Glide.with(this).load(R.drawable.haha_revert).into(reversed)
         val random = (Math.random() * indicators.size).toInt()
-        av.indicator = indicators[random]
+        av.indicator = BallSpinFadeLoaderIndicator()
     }
     // </editor-fold>
 
@@ -96,10 +96,6 @@ class ReverseGifActivity : AppCompatActivity() {
                 .choose(MimeType.of(MimeType.GIF))
                 .showSingleMediaType(true)
                 .countable(false)
-                .capture(false)
-                .captureStrategy(
-                        CaptureStrategy(true, mContext.packageName + ".fileprovider")
-                )
                 .maxSelectable(1)
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                 .thumbnailScale(0.85f)
@@ -114,7 +110,7 @@ class ReverseGifActivity : AppCompatActivity() {
         reversed.setImageBitmap(null)
         if (useNative) {
             withNativeRevert(source)
-        } else if (type == 0) {
+        } else if (type == 1) {
             withJavaRevert(source)
         } else {
             withFastRevert(source)

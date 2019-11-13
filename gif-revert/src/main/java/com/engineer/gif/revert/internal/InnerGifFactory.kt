@@ -2,7 +2,6 @@ package com.engineer.gif.revert.internal
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.util.Log
 import com.engineer.gif.revert.ResFrame
 import com.engineer.gif.revert.lib.AnimatedGifEncoder
 import java.io.ByteArrayOutputStream
@@ -11,9 +10,9 @@ import java.io.ByteArrayOutputStream
  * @author rookie
  * @since 07-06-2019
  */
-const val TAG = "GifFactory"
 
-internal object _GifFactory :BaseInnerGifFactory(){
+
+internal object _InnerGifFactory : BaseInnerGifFactory() {
 
     override fun genGifByFrames(context: Context, frames: List<ResFrame>): String {
         val t1 = TaskTime()
@@ -25,10 +24,7 @@ internal object _GifFactory :BaseInnerGifFactory(){
         for (value in frames) {
             val bitmap = BitmapFactory.decodeFile(value.path)
             encoder.setDelay(value.delay)
-            val t2 = TaskTime()
             encoder.addFrame(bitmap)
-            t2.release("addFrame")
-            Log.e("GifFactory", frames.indexOf(value).toString())
             bitmap.recycle()
         }
         val t3 = TaskTime()
