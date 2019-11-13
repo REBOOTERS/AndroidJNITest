@@ -6,7 +6,7 @@ import android.text.TextUtils
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 import com.engineer.gif.revert.internal.GlideInternal
-import com.engineer.gif.revert.internal._GifFactory2
+import com.engineer.gif.revert.internal.InnerGifFactory2
 import io.reactivex.Observable
 import org.jetbrains.annotations.Nullable
 import java.io.File
@@ -23,15 +23,15 @@ object GifFactory2 {
 
 
     fun getReverseRes(context: Context, @RawRes @DrawableRes @Nullable resourceId: Int?): Observable<String> {
-        return _GifFactory2.getTaskResult(context, GlideInternal.load(context, resourceId))
+        return InnerGifFactory2.getTaskResult(context, GlideInternal.load(context, resourceId))
     }
 
     fun getReverseRes(context: Context, @Nullable file: File?): Observable<String> {
-        return _GifFactory2.getTaskResult(context, GlideInternal.load(context, file))
+        return InnerGifFactory2.getTaskResult(context, GlideInternal.load(context, file))
     }
 
     fun getReverseRes(context: Context, @Nullable uri: Uri?): Observable<String> {
-        return _GifFactory2.getTaskResult(context, GlideInternal.load(context, uri))
+        return InnerGifFactory2.getTaskResult(context, GlideInternal.load(context, uri))
     }
 
     fun getReverseRes(context: Context, url: String?): Observable<String> {
@@ -39,6 +39,6 @@ object GifFactory2 {
             return Observable.just("")
         }
         val futureTask = GlideInternal.load(context, url)
-        return _GifFactory2.getTaskResult(context, futureTask)
+        return InnerGifFactory2.getTaskResult(context, futureTask)
     }
 }

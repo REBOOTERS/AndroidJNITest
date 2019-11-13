@@ -16,7 +16,7 @@ import kotlin.collections.ArrayList
  * @author rookie
  * @since 11-12-2019
  */
-abstract class _BaseGifFactory {
+abstract class BaseInnerGifFactory {
     fun getTaskResult(context: Context, task: FutureTarget<GifDrawable>): Observable<String> {
 
         return Observable.create<String> {

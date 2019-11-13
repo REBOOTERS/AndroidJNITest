@@ -3,19 +3,9 @@ package com.engineer.gif.revert.internal
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Log
-import com.bumptech.glide.gifdecoder.GifDecoder
-import com.bumptech.glide.load.resource.gif.GifDrawable
-import com.bumptech.glide.request.FutureTarget
 import com.engineer.gif.revert.ResFrame
-import com.engineer.gif.revert.lib.AnimatedGIFWriter
 import com.engineer.gif.revert.lib.AnimatedGifEncoder
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.util.Collections.reverse
 
 /**
  * @author rookie
@@ -23,7 +13,7 @@ import java.util.Collections.reverse
  */
 const val TAG = "GifFactory"
 
-internal object _GifFactory :_BaseGifFactory(){
+internal object _GifFactory :BaseInnerGifFactory(){
 
     override fun genGifByFrames(context: Context, frames: List<ResFrame>): String {
         val t1 = TaskTime()
