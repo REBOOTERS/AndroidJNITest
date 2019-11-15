@@ -40,7 +40,7 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
     private var bitsPerPixel = 0x08
 
     private val bytes_buf = ByteArray(256)
-    private var colorPalette: IntArray? = null
+    private var colorPalette: IntArray = IntArray(256)
 
     /**
      * A child is made up of a parent(or prefix) code plus a suffix color
@@ -88,10 +88,10 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
         // Tell the decoder to initialize the string table
         send_code_to_buffer(clearCode, os)
         // Get the first color and assign it to parent
-        parent = (pixels[index++] and 0xff).toInt()
+        parent = (pixels[index++] and 0xff.toByte()).toInt()
 
         while (index < dimension) {
-            color = pixels[index++] and 0xff
+            color = (pixels[index++] and 0xff.toByte()).toInt()
             son = child[parent]
 
             if (son > 0) {
@@ -416,7 +416,6 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
         // Reduce colors, if the color depth is less than 8 bits, reduce colors
         // to the actual bits needed, otherwise reduce to 8 bits.
         val newPixels = ByteArray(imageWidth * imageHeight)
-        colorPalette = IntArray(256)
 
         colorInfo = checkColorDepth(pixels, newPixels, colorPalette)
 
@@ -537,10 +536,10 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
         val descriptor = ByteArray(7)
         // Screen_width
         descriptor[0] = (screen_width and 0xff).toByte()
-        descriptor[1] = (screen_width shr 8 and 0xff).toByte()
+        descriptor[1] = (screen_width.toInt() shr 8 and 0xff).toByte()
         // Screen_height
         descriptor[2] = (screen_height and 0xff).toByte()
-        descriptor[3] = (screen_height shr 8 and 0xff).toByte()
+        descriptor[3] = (screen_height.toInt() shr 8 and 0xff).toByte()
         // Global flags
         descriptor[4] = (flags and 0xff).toByte()
         // Background color
@@ -596,17 +595,17 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
         val frameWidth: Int
         val frameHeight: Int
         val delay: Int
-        val disposalMethod = DISPOSAL_UNSPECIFIED
-        val userInputFlag = USER_INPUT_NONE
-        val transparencyFlag = TRANSPARENCY_INDEX_NONE
+        var disposalMethod = DISPOSAL_UNSPECIFIED
+        var userInputFlag = USER_INPUT_NONE
+        var transparencyFlag = TRANSPARENCY_INDEX_NONE
 
         // The transparent color value in RRGGBB format.
         // The highest order byte has no effect.
-        val transparentColor = TRANSPARENCY_COLOR_NONE // Default no transparent color
-
-        constructor(frame: Bitmap, delay: Int) : this(frame, 0, 0, delay, GIFFrame.DISPOSAL_UNSPECIFIED) {}
-
-        constructor(frame: Bitmap, delay: Int, disposalMethod: Int) : this(frame, 0, 0, delay, disposalMethod) {}
+        var transparentColor = TRANSPARENCY_COLOR_NONE // Default no transparent color
+//
+//        constructor(frame: Bitmap, delay: Int) : this(frame, 0, 0, delay, GIFFrame.DISPOSAL_UNSPECIFIED) {}
+//
+//        constructor(frame: Bitmap, delay: Int, disposalMethod: Int) : this(frame, 0, 0, delay, disposalMethod) {}
 
         init {
             var delay = delay
@@ -668,7 +667,7 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
     private class WuQuant(private val pixels: IntArray, private var lut_size: Int /*color look-up table size*/) {
 
         private val size: Int /*image size*/
-        private var qadd: IntArray? = null
+        private var qadd: IntArray = null
         private var transparent_color = -1// Transparent color
 
         private val m2 = Array(QUANT_SIZE) { Array(QUANT_SIZE) { FloatArray(QUANT_SIZE) } }
@@ -789,7 +788,7 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
         }
 
         fun quantize(lut: IntArray, colorInfo: IntArray): Int {
-            val cube = arrayOfNulls<Box>(MAXCOLOR)
+            val cube = ArrayList<Box>(MAXCOLOR)
             var lut_r: Int
             var lut_g: Int
             var lut_b: Int
@@ -1239,11 +1238,11 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
     (size: Int) {
 
         /** The array of HashEntry.  */
-        private var array: Array<HashEntry<E>>? = null  // The array of HashEntry
+        private var array: MutableList<HashEntry<E>>   // The array of HashEntry
         private var currentSize: Int = 0  // The number of occupied cells
 
         init {
-            array = arrayOfNulls<HashEntry<*>>(size)
+            array = ArrayList()
             makeEmpty()
         }
 
@@ -1272,7 +1271,8 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
             val oldArray = array
 
             // Create a new double-sized, empty table
-            array = arrayOfNulls<HashEntry<*>>(nextPrime(2 * oldArray!!.size))
+//            array = arrayOfNulls<HashEntry<*>>(nextPrime(2 * oldArray!!.size))
+            array = ArrayList(nextPrime(2 * oldArray.size))
             currentSize = 0
 
             // Copy table over
@@ -1327,8 +1327,11 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
          */
         fun makeEmpty() {
             currentSize = 0
-            for (i in array!!.indices)
-                array[i] = null
+            for (i in array!!.indices) {
+
+            }
+            // TODO: 2019-11-15  置空
+//                array[i] = HashEntry(1,2)
         }
 
         /**
@@ -1399,9 +1402,11 @@ class AnimatedGIFWriter @JvmOverloads constructor(private val isApplyDither: Boo
 
         // Fetch the forward color map index for this RGB
         fun getNearestColorIndex(red: Int, green: Int, blue: Int): Int {
-            return invColorMap[red shr bitsDiscarded shl (bitsReserved shl 1) or
+            val index = red shr bitsDiscarded shl (bitsReserved shl 1) or
                     (green shr bitsDiscarded shl bitsReserved) or
-                    (blue shr bitsDiscarded)] and 0xff
+                    (blue shr bitsDiscarded)
+            val result = (invColorMap[index] and 0xff.toByte()).toInt()
+            return result
         }
 
         /**
