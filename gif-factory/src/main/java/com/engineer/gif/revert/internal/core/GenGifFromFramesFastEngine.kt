@@ -8,7 +8,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 11-17-2019
  */
 object GenGifFromFramesFastEngine {

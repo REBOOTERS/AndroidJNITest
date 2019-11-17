@@ -9,7 +9,7 @@ import com.engineer.gif.revert.lib.AnimatedGifEncoder
 import java.io.ByteArrayOutputStream
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 11-17-2019
  */
 object GenGifFromFramesEngine {

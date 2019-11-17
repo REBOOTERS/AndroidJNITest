@@ -11,9 +11,10 @@ import com.wang.avi.indicators.*
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
+import java.io.File
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 11-17-2019
  */
 class ActivityDelegate(private val context: Activity) {
@@ -80,6 +81,20 @@ class ActivityDelegate(private val context: Activity) {
         } else {
             Toast.makeText(context, "请选择图片先，😁", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun providePath(filename: String): String {
+        val picturesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val path = picturesDir.absolutePath + File.separator + "gif" + File.separator
+        val fileDir = File(path)
+        if (fileDir.exists().not()) {
+            fileDir.mkdir()
+        }
+        val fileName = "$filename.gif"
+        val file = File(fileDir, fileName)
+
+        return file.absolutePath
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="companion object">

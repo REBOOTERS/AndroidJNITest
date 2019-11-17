@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.engineer.cpluspluslite.R
 import com.engineer.gif.GifGenFactory
 import com.engineer.gif.revert.ResFrame
+import com.engineer.gif.video.VideoToFrames
 import com.list.rados.fast_list.FastListAdapter
 import com.list.rados.fast_list.bind
 import com.list.rados.fast_list.update
@@ -86,5 +87,8 @@ class GenGifActivity : BaseActivity() {
 
     override fun genGifFromVideo(uri: Uri) {
         super.genGifFromVideo(uri)
+        val path = activityDelegate.providePath("fly")
+        val videoTo = VideoToFrames(path)
+//        val bitmaps = videoTo.genFramesformFromVideo(uri)
     }
 }

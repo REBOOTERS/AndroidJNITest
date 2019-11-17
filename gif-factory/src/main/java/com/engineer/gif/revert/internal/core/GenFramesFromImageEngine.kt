@@ -14,7 +14,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 11-17-2019
  */
 object GenFramesFromImageEngine {

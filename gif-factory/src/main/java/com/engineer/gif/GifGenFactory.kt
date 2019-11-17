@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 11-17-2019
  *
  * 通过一些图片生成 gif 工厂

@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_reverse_gif.*
 import kotlinx.android.synthetic.main.image_container.*
 
 /**
- * @author zhuyongging @ Zhihu Inc.
+ * @author rookie
  * @since 11-17-2019
  */
 
