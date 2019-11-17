@@ -27,10 +27,12 @@ object GifGenFactory {
 
 
     fun genGifFastModeFromFile(frames: List<ResFrame>): Observable<String> {
-        val path = GenGifFromFramesFastEngine.genGifByFrames(frames)
-        return Observable
-                .just(path)
-                .subscribeOn(Schedulers.io())
+
+        return Observable.create<String> {
+            val path = GenGifFromFramesFastEngine.genGifByFrames(frames)
+            it.onNext(path)
+            it.onComplete()
+        }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
     }

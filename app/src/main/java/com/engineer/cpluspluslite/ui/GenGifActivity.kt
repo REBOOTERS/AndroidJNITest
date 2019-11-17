@@ -3,6 +3,7 @@ package com.engineer.cpluspluslite.ui
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,7 +13,15 @@ import com.engineer.gif.GifGenFactory
 import com.engineer.gif.revert.ResFrame
 import com.list.rados.fast_list.FastListAdapter
 import com.list.rados.fast_list.bind
+import com.list.rados.fast_list.update
 import kotlinx.android.synthetic.main.activity_gen_gif.*
+import kotlinx.android.synthetic.main.activity_gen_gif.file
+import kotlinx.android.synthetic.main.activity_gen_gif.go
+import kotlinx.android.synthetic.main.activity_gen_gif.loading
+import kotlinx.android.synthetic.main.activity_gen_gif.result
+import kotlinx.android.synthetic.main.activity_gen_gif.share
+import kotlinx.android.synthetic.main.activity_gen_gif.timer
+import kotlinx.android.synthetic.main.activity_reverse_gif.*
 import kotlinx.android.synthetic.main.resources_results_layout.*
 import kotlinx.android.synthetic.main.round_image_item.view.*
 
@@ -52,7 +61,7 @@ class GenGifActivity : BaseActivity() {
         lists.visibility = View.VISIBLE
         datas.clear()
         datas.addAll(uris)
-        adapter.notifyDataSetChanged()
+        lists.update(datas)
         originalUrl = Uri.parse(uris[0])
         val frames = ArrayList<ResFrame>()
         for (uri in uris) {
@@ -61,8 +70,18 @@ class GenGifActivity : BaseActivity() {
             frames.add(frame)
         }
 
+        loading.visibility = View.VISIBLE
+        result.text = "转换中 ......."
+        timer.base = SystemClock.elapsedRealtime()
+        timer.start()
         GifGenFactory.genGifFastModeFromFile(frames)
-                .subscribe { Glide.with(mContext).load(it).into(reversed) }
+                .subscribe {
+
+                    loading.visibility = View.GONE
+                    result.text = "图片保存在 :$it"
+                    timer.stop()
+                    Glide.with(mContext).load(it).into(reversed)
+                }
     }
 
     override fun genGifFromVideo(uri: Uri) {
