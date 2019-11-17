@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.ReverseGifActivity"
+    tools:context=".ui.GenGifActivity"
     tools:ignore="ContentDescription,MissingDefaultResource">
 
     <RelativeLayout
@@ -86,13 +86,14 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="13dp"
             android:layout_marginBottom="16dp"
-            android:layout_toStartOf="@id/start2"
+            android:layout_toStartOf="@id/by_video"
             android:elevation="10dp"
             android:src="@drawable/ic_photo_camera_black_24dp"
+            android:visibility="gone"
             app:fabSize="mini" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/start2"
+            android:id="@+id/by_video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -120,7 +121,7 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/image_container" />
+    <include layout="@layout/resources_results_layout" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/loading"

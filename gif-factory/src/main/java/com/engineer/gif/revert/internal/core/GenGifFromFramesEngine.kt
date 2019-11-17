@@ -1,21 +1,20 @@
-package com.engineer.gif.revert.internal
+package com.engineer.gif.revert.internal.core
 
 import android.content.Context
 import android.graphics.BitmapFactory
 import com.engineer.gif.revert.ResFrame
+import com.engineer.gif.revert.internal.IOTool
+import com.engineer.gif.revert.internal.TaskTime
 import com.engineer.gif.revert.lib.AnimatedGifEncoder
 import java.io.ByteArrayOutputStream
 
 /**
- * @author rookie
- * @since 07-06-2019
+ * @author zhuyongging @ Zhihu Inc.
+ * @since 11-17-2019
  */
+object GenGifFromFramesEngine {
 
-
-internal object _InnerGifFactory : BaseInnerGifFactory() {
-
-    override fun genGifByFrames(context: Context, frames: List<ResFrame>): String {
-        val t1 = TaskTime()
+    fun genGifByFrames(frames: List<ResFrame>): String {
 
         val os = ByteArrayOutputStream()
         val encoder = AnimatedGifEncoder()
@@ -33,11 +32,7 @@ internal object _InnerGifFactory : BaseInnerGifFactory() {
 
         val path = IOTool.saveStreamToSDCard("test", os)
         os.close()
-        t1.release("genGifByFrames")
-        IOTool.notifySystemGallery(context, path)
-        log(path)
+
         return path
     }
-
-
 }

@@ -1,51 +1,48 @@
-package com.engineer.gif.revert.internal
+package com.engineer.gif.revert.internal.core
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import com.bumptech.glide.gifdecoder.GifDecoder
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.FutureTarget
 import com.engineer.gif.revert.ResFrame
+import com.engineer.gif.revert.internal.IOTool
+import com.engineer.gif.revert.internal.ReflectTool
+import com.engineer.gif.revert.internal.TaskTime
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
 /**
- * @author rookie
- * @since 11-12-2019
+ * @author zhuyongging @ Zhihu Inc.
+ * @since 11-17-2019
  */
-const val TAG = "GifFactory"
-abstract class BaseInnerGifFactory {
-    fun getTaskResult(context: Context, task: FutureTarget<GifDrawable>): Observable<String> {
+object GenFramesFromImageEngine {
 
-        return Observable.create<String> {
+
+    fun getFrameResultObservable(context: Context, task: FutureTarget<GifDrawable>): Observable<List<ResFrame>> {
+
+        return Observable.create<List<ResFrame>> {
             val drawable = task.get()
             try {
-                val path = reverseRes(context, drawable)
+                val path = supplyFrames(context, drawable)
                 it.onNext(path)
                 it.onComplete()
             } catch (e: Exception) {
                 it.onError(e)
             }
-        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        }.subscribeOn(Schedulers.io())
 
     }
 
-    private fun reverseRes(context: Context, resource: GifDrawable?): String {
+    fun supplyFrames(context: Context, resource: GifDrawable?): List<ResFrame> {
         if (resource == null) {
-            return ""
+            return ArrayList()
         }
         val frames = getResourceFrames(resource, context)
-
-
         Collections.reverse(frames)
-
-        return genGifByFrames(context, frames)
+        return frames
     }
-
 
     private fun getResourceFrames(resource: GifDrawable, context: Context): List<ResFrame> {
         val frames = ArrayList<ResFrame>()
@@ -79,37 +76,5 @@ abstract class BaseInnerGifFactory {
         }
         t1.release("getGifDecoder")
         return decoder
-    }
-
-
-    fun getFrameResult(context: Context, task: FutureTarget<GifDrawable>): Observable<List<ResFrame>> {
-
-        return Observable.create<List<ResFrame>> {
-            val drawable = task.get()
-            try {
-                val path = supplyFrames(context, drawable)
-                it.onNext(path)
-                it.onComplete()
-            } catch (e: Exception) {
-                it.onError(e)
-            }
-        }.subscribeOn(Schedulers.io())
-
-    }
-
-    private fun supplyFrames(context: Context, resource: GifDrawable?): List<ResFrame> {
-        if (resource == null) {
-            return ArrayList()
-        }
-        val frames = getResourceFrames(resource, context)
-        Collections.reverse(frames)
-        return frames
-    }
-
-    abstract fun genGifByFrames(context: Context, frames: List<ResFrame>): String
-
-
-    protected fun log(msg: String) {
-        Log.e(TAG, msg)
     }
 }

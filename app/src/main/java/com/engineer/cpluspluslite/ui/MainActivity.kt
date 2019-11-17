@@ -1,9 +1,10 @@
-package com.engineer.cpluspluslite
+package com.engineer.cpluspluslite.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.engineer.cpluspluslite.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         sample_text.text = stringFromJNI()
         sample_text.setOnClickListener { startActivity(Intent(mContext, ReverseGifActivity::class.java)) }
+        go.setOnClickListener { startActivity(Intent(mContext, GenGifActivity::class.java)) }
     }
 
 

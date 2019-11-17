@@ -62,7 +62,7 @@ JNIEXPORT jint JNICALL
 Java_com_engineer_cpluspluslite_Gifflen_addFrame(JNIEnv *ioEnv, jobject ioThis,
                                                  jintArray inArray);
 
-JNIEXPORT jstring JNICALL Java_com_engineer_cpluspluslite_MainActivity_stringFromJNI(JNIEnv *env,
+JNIEXPORT jstring JNICALL Java_com_engineer_cpluspluslite_ui_MainActivity_stringFromJNI(JNIEnv *env,
                                                                                      jobject ioThis/* this */);
 };
 
@@ -86,7 +86,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     return JNI_VERSION_1_4;
 }
 
-JNIEXPORT jstring  JNICALL Java_com_engineer_cpluspluslite_MainActivity_stringFromJNI(JNIEnv *env,
+JNIEXPORT jstring  JNICALL Java_com_engineer_cpluspluslite_ui_MainActivity_stringFromJNI(JNIEnv *env,
                                                                                       jobject ioThis/* this */) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());

@@ -1,21 +1,19 @@
-package com.engineer.gif.revert.internal
+package com.engineer.gif.revert.internal.core
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import com.engineer.gif.revert.ResFrame
+import com.engineer.gif.revert.internal.IOTool
 import com.engineer.gif.revert.lib.AnimatedGIFWriter
 import java.io.File
 import java.io.FileOutputStream
 
 /**
- * @author rookie
- * @since 07-06-2019
+ * @author zhuyongging @ Zhihu Inc.
+ * @since 11-17-2019
  */
+object GenGifFromFramesFastEngine {
 
-internal object InnerGifFactory2 : BaseInnerGifFactory() {
-
-    override fun genGifByFrames(context: Context, frames: List<ResFrame>): String {
-        val t1 = TaskTime()
+    fun genGifByFrames(frames: List<ResFrame>): String {
         val path = IOTool.provideRandomPath("test")
         val os = FileOutputStream(File(path))
         val animatedGIFWriter = AnimatedGIFWriter()
@@ -25,10 +23,6 @@ internal object InnerGifFactory2 : BaseInnerGifFactory() {
             animatedGIFWriter.writeFrame(os, bitmap, value.delay)
         }
         animatedGIFWriter.finishWrite(os)
-        t1.release("genGifByFramesWithGPU")
-        IOTool.notifySystemGallery(context, path)
         return path
     }
-
-
 }
