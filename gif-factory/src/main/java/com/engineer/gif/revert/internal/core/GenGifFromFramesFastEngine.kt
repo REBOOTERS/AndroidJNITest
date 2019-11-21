@@ -1,5 +1,6 @@
 package com.engineer.gif.revert.internal.core
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.engineer.gif.revert.ResFrame
 import com.engineer.gif.revert.internal.IOTool
@@ -12,6 +13,20 @@ import java.io.FileOutputStream
  * @since 11-17-2019
  */
 object GenGifFromFramesFastEngine {
+
+    fun genGifByFramesFromBitmaps(frames: List<Bitmap>): String {
+        val path = IOTool.provideRandomPath("test")
+        val os = FileOutputStream(File(path))
+        val animatedGIFWriter = AnimatedGIFWriter()
+        animatedGIFWriter.prepareForWrite(os, -1, -1)
+        for (value in frames) {
+//            val bitmap = BitmapFactory.decodeFile(value)
+            animatedGIFWriter.writeFrame(os, value, 1000)
+        }
+        animatedGIFWriter.finishWrite(os)
+        return path
+    }
+
 
     fun genGifByFrames(frames: List<ResFrame>): String {
         val path = IOTool.provideRandomPath("test")

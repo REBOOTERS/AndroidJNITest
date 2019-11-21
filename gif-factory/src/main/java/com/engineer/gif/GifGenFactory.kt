@@ -1,5 +1,6 @@
 package com.engineer.gif
 
+import android.graphics.Bitmap
 import com.engineer.gif.revert.ResFrame
 import com.engineer.gif.revert.internal.core.GenGifFromFramesEngine
 import com.engineer.gif.revert.internal.core.GenGifFromFramesFastEngine
@@ -30,6 +31,17 @@ object GifGenFactory {
 
         return Observable.create<String> {
             val path = GenGifFromFramesFastEngine.genGifByFrames(frames)
+            it.onNext(path)
+            it.onComplete()
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+    }
+
+    fun genGifFastModeFromBitmaps(frames: List<Bitmap>): Observable<String> {
+
+        return Observable.create<String> {
+            val path = GenGifFromFramesFastEngine.genGifByFramesFromBitmaps(frames)
             it.onNext(path)
             it.onComplete()
         }.subscribeOn(Schedulers.io())

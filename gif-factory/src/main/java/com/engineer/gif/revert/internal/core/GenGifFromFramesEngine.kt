@@ -1,6 +1,7 @@
 package com.engineer.gif.revert.internal.core
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.engineer.gif.revert.ResFrame
 import com.engineer.gif.revert.internal.IOTool
@@ -13,6 +14,27 @@ import java.io.ByteArrayOutputStream
  * @since 11-17-2019
  */
 object GenGifFromFramesEngine {
+
+    fun genGifByFramesFromBitmap(frames: List<Bitmap>): String {
+
+        val os = ByteArrayOutputStream()
+        val encoder = AnimatedGifEncoder()
+        encoder.start(os)
+        encoder.setRepeat(0)
+        for (value in frames) {
+            encoder.setDelay(1000)
+            encoder.addFrame(value)
+//            value.recycle()
+        }
+        val t3 = TaskTime()
+        encoder.finish()
+        t3.release("finish")
+
+        val path = IOTool.saveStreamToSDCard("test", os)
+        os.close()
+
+        return path
+    }
 
     fun genGifByFrames(frames: List<ResFrame>): String {
 
