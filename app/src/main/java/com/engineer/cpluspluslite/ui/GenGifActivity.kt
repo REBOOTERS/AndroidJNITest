@@ -91,7 +91,7 @@ class GenGifActivity : BaseActivity() {
         super.genGifFromVideo(uri)
         val path = activityDelegate.providePath("fly")
         val videoTo = VideoToFrames(path)
-        val bitmaps = videoTo.genFramesformFromVideo(uri, 0, 5 * 1000, 5 * 1000)
+        val bitmaps = videoTo.genFramesformFromVideo(uri, 0, 5 , 5 * 1000)
         loading.visibility = View.VISIBLE
         result.text = "转换中 ......."
         timer.base = SystemClock.elapsedRealtime()
