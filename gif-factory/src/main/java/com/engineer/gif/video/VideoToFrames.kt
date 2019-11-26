@@ -9,7 +9,6 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.IOException
-import java.util.*
 
 /**
  * 视频转换为帧序列
@@ -46,7 +45,7 @@ class VideoToFrames {
     }
 
 
-    fun genFramesformFromVideo(videoPath: String?, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap>? {
+    fun genFramesFromVideo(videoPath: String?, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap>? {
         require(!TextUtils.isEmpty(videoPath)) { "VideoPath is empty!" }
         val retriever = MediaMetadataRetriever()
         try {
@@ -67,7 +66,7 @@ class VideoToFrames {
     }
 
 
-    fun genFramesformFromVideo(uri: Uri?, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap>? {
+    fun genFramesFromVideo(uri: Uri?, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap> {
         require(!(uri == null || TextUtils.isEmpty(uri.path))) { "uri is empty!" }
         val retriever = MediaMetadataRetriever()
         try {
@@ -96,7 +95,7 @@ class VideoToFrames {
      * @param periodMillSecond 转换周期
      * @return 转换是否完成
      */
-    fun genFramesformFromVideo(afd: AssetFileDescriptor?, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap>? {
+    fun genFramesFromVideo(afd: AssetFileDescriptor?, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap>? {
         requireNotNull(afd) { "AssetFileDescriptor is empty!" }
         val retriever = MediaMetadataRetriever()
         try {
@@ -116,10 +115,10 @@ class VideoToFrames {
      * @param periodMillSecond 转换周期
      * @return 转换是否完成
      */
-    private fun transformWithMediaMetadataRetriever(retriever: MediaMetadataRetriever, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap>? {
+    private fun transformWithMediaMetadataRetriever(retriever: MediaMetadataRetriever, startMillSecond: Long, endMillSecond: Long, periodMillSecond: Long): ArrayList<Bitmap> {
         require(!(startMillSecond < 0 || endMillSecond <= 0 || startMillSecond >= endMillSecond || periodMillSecond <= 0)) { "startMillSecond and endMillSecond must > 0 , startMillSecond >= endMillSecond" }
-        return try {
-            val bitmaps: ArrayList<Bitmap> = ArrayList()
+        val bitmaps: ArrayList<Bitmap> = ArrayList()
+        try {
             // 获取视频时长
             val durationStr = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
             val duration = durationStr.toLong()
@@ -136,7 +135,7 @@ class VideoToFrames {
             return bitmaps
         } catch (e: Exception) {
             e.printStackTrace()
-            return null
+            return bitmaps
         }
     }
 
