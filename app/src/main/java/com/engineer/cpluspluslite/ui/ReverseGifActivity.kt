@@ -36,7 +36,7 @@ class ReverseGifActivity : BaseActivity() {
         go.setOnClickListener { selectGif(true, 0) }
 
         share.setOnClickListener {
-            activityDelegate.share(originalUrl, revertedlUrl)
+            activityDelegate.share(originalUrl, revertedUrl)
         }
         file.setOnClickListener {
             activityDelegate.openFileSystem()
@@ -86,7 +86,7 @@ class ReverseGifActivity : BaseActivity() {
                     loading.visibility = View.GONE
 
                     originalUrl = source
-                    revertedlUrl = Uri.parse(it)
+                    revertedUrl = Uri.parse(it)
                     result.text = "图片保存在 :$it"
                     timer.stop()
 
@@ -106,7 +106,7 @@ class ReverseGifActivity : BaseActivity() {
                     loading.visibility = View.GONE
 
                     originalUrl = source
-                    revertedlUrl = Uri.parse(it)
+                    revertedUrl = Uri.parse(it)
                     result.text = "图片保存在 :$it"
                     timer.stop()
 

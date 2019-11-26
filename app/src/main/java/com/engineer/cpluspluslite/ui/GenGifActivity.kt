@@ -33,7 +33,7 @@ class GenGifActivity : BaseActivity() {
 
 
         share.setOnClickListener {
-            activityDelegate.share(originalUrl, revertedlUrl)
+            activityDelegate.share(originalUrl, revertedUrl)
         }
         file.setOnClickListener {
             activityDelegate.openFileSystem()
@@ -53,9 +53,10 @@ class GenGifActivity : BaseActivity() {
     }
 
 
-    @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult", "SetTextI18n")
     override fun genGifFromImages(uris: List<String>) {
         lists.visibility = View.VISIBLE
+        video_container.visibility = View.GONE
         datas.clear()
         datas.addAll(uris)
         lists.update(datas)
@@ -83,7 +84,10 @@ class GenGifActivity : BaseActivity() {
 
     override fun genGifFromVideo(uri: Uri) {
         super.genGifFromVideo(uri)
+        lists.visibility = View.GONE
+        video_container.visibility = View.VISIBLE
 
+        video_container.setVideoURI(uri)
 
         loading.visibility = View.VISIBLE
         result.text = "转换中 ......."
@@ -93,7 +97,7 @@ class GenGifActivity : BaseActivity() {
         processVideo(uri)
     }
 
-    @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult", "SetTextI18n")
     private fun processVideo(uri: Uri) {
         val path = activityDelegate.providePath("fly")
         val videoTo = VideoToFrames(path)

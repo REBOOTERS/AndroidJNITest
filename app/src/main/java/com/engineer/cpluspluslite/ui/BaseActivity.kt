@@ -32,7 +32,7 @@ open class BaseActivity : AppCompatActivity() {
     protected var mHasPermission: Boolean = false
     protected lateinit var mContext: Context
 
-    protected var revertedlUrl: Uri? = null
+    protected var revertedUrl: Uri? = null
     protected var originalUrl: Uri? = null
 
     lateinit var activityDelegate: ActivityDelegate
