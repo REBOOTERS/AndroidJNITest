@@ -18,6 +18,7 @@ import com.list.rados.fast_list.FastListAdapter
 import com.list.rados.fast_list.bind
 import com.list.rados.fast_list.update
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_gen_gif.*
 import kotlinx.android.synthetic.main.resources_results_layout.*
 import kotlinx.android.synthetic.main.round_image_item.view.*
@@ -74,10 +75,8 @@ class GenGifActivity : BaseActivity() {
         timer.start()
         GifGenFactory.genGifFastModeFromFile(frames)
                 .subscribe {
-
-                    loading.visibility = View.GONE
                     result.text = "图片保存在 :$it"
-                    timer.stop()
+                    hideLoading()
                     Glide.with(mContext).load(it).into(reversed)
                 }
     }
@@ -105,19 +104,22 @@ class GenGifActivity : BaseActivity() {
             val bitmaps = videoTo.genFramesFromVideo(uri, 0, 5 * 1000, 1 * 1000)
             Log.e(TAG, "bitmaps : ${bitmaps.size}")
             it.onNext(bitmaps)
-        }.filter {
-            it.size > 0
-        }.map { it ->
+        }.subscribeOn(Schedulers.io()).subscribe { it ->
             GifGenFactory.genGifFastModeFromBitmaps(it)
                     .subscribe({
-                        loading.visibility = View.GONE
+                        hideLoading()
                         result.text = "图片保存在 :$it"
-                        timer.stop()
                         Glide.with(mContext).load(it).into(reversed)
                     }, { error ->
+                        hideLoading()
                         Toast.makeText(mContext, error.message, Toast.LENGTH_SHORT).show()
                         error.printStackTrace()
                     })
         }
+    }
+
+    private fun hideLoading() {
+        loading.visibility = View.GONE
+        timer.stop()
     }
 }

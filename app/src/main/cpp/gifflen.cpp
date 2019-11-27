@@ -88,7 +88,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 JNIEXPORT jstring  JNICALL Java_com_engineer_cpluspluslite_ui_MainActivity_stringFromJNI(JNIEnv *env,
                                                                                       jobject ioThis/* this */) {
-    std::string hello = "Hello from C++";
+    std::string hello = "Hello from Native";
     return env->NewStringUTF(hello.c_str());
 }
 
