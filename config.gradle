@@ -9,12 +9,12 @@ ext {
     support_versioin_material = '1.0.0'
     constraint_layout = '1.1.3'
 
-    kotlin_version = '1.3.50'
-    gradle_version = '3.5.3'
+    kotlin_version = '1.3.70'
+    gradle_version = '3.6.1'
 
     leakcanary = '1.6.2'
     leakcanary_nopo = '1.6.1'
-    glide = '4.10.0'
+    glide = '4.11.0'
     arouter_api = '1.5.0'
     arouter_compiler = '1.2.2'
     arouter_register = '1.0.2'
