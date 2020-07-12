@@ -48,7 +48,7 @@ class GenGifActivity : BaseActivity() {
             activityDelegate.openGalleryForVideo()
         }
 
-        adapter = lists.bind(datas, R.layout.round_image_item) { path: String ->
+        adapter = lists.bind(datas, R.layout.round_image_item) { path: String,_ ->
             Glide.with(mContext).load(path).placeholder(R.drawable.haha).into(image)
         }.layoutManager(GridLayoutManager(mContext, 3))
     }
