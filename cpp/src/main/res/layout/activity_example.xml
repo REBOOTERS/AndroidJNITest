@@ -7,7 +7,7 @@
     tools:context=".ExampleActivity">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/simple_map"
         android:gravity="center"
         android:textSize="22sp"
         android:text="@android:string/ok"

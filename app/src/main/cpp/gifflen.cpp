@@ -86,12 +86,6 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     return JNI_VERSION_1_4;
 }
 
-JNIEXPORT jstring  JNICALL Java_com_engineer_cpluspluslite_ui_MainActivity_stringFromJNI(JNIEnv *env,
-                                                                                      jobject ioThis/* this */) {
-    std::string hello = "Hello from Native";
-    return env->NewStringUTF(hello.c_str());
-}
-
 JNIEXPORT jint JNICALL Java_com_engineer_cpluspluslite_Gifflen_init(JNIEnv *ioEnv, jobject ioThis,
                                                                     jstring gifName,
                                                                     jint w, jint h, jint numColors,
@@ -996,4 +990,3 @@ void NeuQuant::learn() {
     sprintf(s, "final alpha = %f", ((float) alpha) / initalpha);
     __android_log_write(ANDROID_LOG_VERBOSE, "com_lchad_gifflen", s);
 }
-
