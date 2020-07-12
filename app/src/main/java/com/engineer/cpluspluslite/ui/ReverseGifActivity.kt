@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.engineer.cpluspluslite.Gifflen
+import com.engineer.android.gifflen.Gifflen
 import com.engineer.cpluspluslite.R
 import com.engineer.gif.GifRevertFactory
 import com.engineer.gif.revert.FramesFactory
@@ -167,5 +167,12 @@ class ReverseGifActivity : BaseActivity() {
                     loading.visibility = View.GONE
                     timer.stop()
                 }
+    }
+
+    // TODO: 2020/7/12  暂时放在这里把
+    companion object {
+        init {
+            System.loadLibrary("gifflen")
+        }
     }
 }

@@ -19,15 +19,7 @@ class MainActivity : AppCompatActivity() {
         mContext = this
         setContentView(R.layout.activity_main)
         sample_text.setOnClickListener { startActivity(Intent(mContext, ExampleActivity::class.java)) }
-        go.setOnClickListener { startActivity(Intent(mContext, GenGifActivity::class.java)) }
+        gen.setOnClickListener { startActivity(Intent(mContext, GenGifActivity::class.java)) }
+        reverse.setOnClickListener { startActivity(Intent(mContext, ReverseGifActivity::class.java)) }
     }
-
-
-
-    companion object {
-        init {
-            System.loadLibrary("gifflen")
-        }
-    }
-
 }

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake",
+    "/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
+    "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/zhuyongging/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/debug/arm64-v8a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/zhuyongging/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/debug/arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "gifflen-Debug-arm64-v8a": {
+      "artifactName": "gifflen",
+      "buildCommand": "/Users/zhuyongging/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/debug/arm64-v8a\" gifflen",
+      "abi": "arm64-v8a",
+      "output": "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/build/intermediates/cmake/debug/obj/arm64-v8a/libgifflen.so",
+      "runtimeFiles": []
+    }
+  }
+}

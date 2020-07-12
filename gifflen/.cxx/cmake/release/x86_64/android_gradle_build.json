@@ -1,0 +1,48 @@
+{
+  "stringTable": {
+    "0": "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/release/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dgifflen_EXPORTS -I/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/src/main/cpp/src/main/cpp/include/dib.h -I/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/src/main/cpp/src/main/cpp/include/neuquant.h -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -frtti -fexceptions -O2 -DNDEBUG -fPIC"
+  },
+  "buildFiles": [
+    "/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake",
+    "/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
+    "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/zhuyongging/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/release/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/zhuyongging/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/release/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "gifflen-Release-x86_64": {
+      "buildCommand": "/Users/zhuyongging/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/.cxx/cmake/release/x86_64\" gifflen",
+      "buildType": "release",
+      "toolchain": "1015796337",
+      "abi": "x86_64",
+      "artifactName": "gifflen",
+      "files": [
+        {
+          "src": "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/src/main/cpp/gifflen.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/src/main/cpp/dib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/build/intermediates/cmake/release/obj/x86_64/libgifflen.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "1015796337": {
+      "cppCompilerExecutable": "/Users/zhuyongging/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
