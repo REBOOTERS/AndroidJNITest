@@ -1,1 +1,2 @@
+include ':cpp'
 include ':app', ':gif-factory'
