@@ -1,6 +1,0 @@
-# ninja log v5
-1	307	1594518519	CMakeFiles/gifflen.dir/dib.cpp.o	f2cbaeac9ebc7757
-1	893	1594518602	CMakeFiles/gifflen.dir/gifflen.cpp.o	8e54b8695a40ec10
-894	1065	1594518602	/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/build/intermediates/cmake/debug/obj/arm64-v8a/libgifflen.so	7fc6ed2b78cb0ca3
-1	783	1594518888	CMakeFiles/gifflen.dir/gifflen.cpp.o	8e54b8695a40ec10
-783	911	1594518888	/Users/zhuyongging/Documents/mygithub/CplusplusLite/gifflen/build/intermediates/cmake/debug/obj/arm64-v8a/libgifflen.so	7fc6ed2b78cb0ca3
