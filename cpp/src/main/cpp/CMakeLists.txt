@@ -17,7 +17,9 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        fly.cpp)
+        fly.cpp
+        extra/util.h
+        extra/log_command.h)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

@@ -11,11 +11,11 @@ class ExampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_example)
         val result = stringFromJNI()
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
-        simple_map.text = mapStringInJNI("Android")
+        simple_map.text = mapStringWithJNI("Android")
     }
 
     private external fun stringFromJNI(): String
-    private external fun mapStringInJNI(input: String): String
+    private external fun mapStringWithJNI(input: String): String
 
     companion object {
         init {
