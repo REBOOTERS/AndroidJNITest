@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.engineer.cpluspluslite.Gifflen
+import com.engineer.android.gifflen.Gifflen
 import com.engineer.cpluspluslite.R
 import com.engineer.gif.GifRevertFactory
 import com.engineer.gif.revert.FramesFactory
@@ -36,7 +36,7 @@ class ReverseGifActivity : BaseActivity() {
         go.setOnClickListener { selectGif(true, 0) }
 
         share.setOnClickListener {
-            activityDelegate.share(originalUrl, revertedlUrl)
+            activityDelegate.share(originalUrl, revertedUrl)
         }
         file.setOnClickListener {
             activityDelegate.openFileSystem()
@@ -86,7 +86,7 @@ class ReverseGifActivity : BaseActivity() {
                     loading.visibility = View.GONE
 
                     originalUrl = source
-                    revertedlUrl = Uri.parse(it)
+                    revertedUrl = Uri.parse(it)
                     result.text = "图片保存在 :$it"
                     timer.stop()
 
@@ -106,7 +106,7 @@ class ReverseGifActivity : BaseActivity() {
                     loading.visibility = View.GONE
 
                     originalUrl = source
-                    revertedlUrl = Uri.parse(it)
+                    revertedUrl = Uri.parse(it)
                     result.text = "图片保存在 :$it"
                     timer.stop()
 
@@ -167,5 +167,12 @@ class ReverseGifActivity : BaseActivity() {
                     loading.visibility = View.GONE
                     timer.stop()
                 }
+    }
+
+    // TODO: 2020/7/12  暂时放在这里把
+    companion object {
+        init {
+            System.loadLibrary("gifflen")
+        }
     }
 }

@@ -1,6 +1,6 @@
 ext {
-    compileSdkVersion = 28
-    buildToolsVersion = '28.0.3'
+    compileSdkVersion = 29
+    buildToolsVersion = '30.0.0'
     minSdkVersion = 21
     targetSdkVersion = 28
 
@@ -9,12 +9,12 @@ ext {
     support_versioin_material = '1.0.0'
     constraint_layout = '1.1.3'
 
-    kotlin_version = '1.3.50'
-    gradle_version = '3.5.2'
+    kotlin_version = '1.3.72'
+    gradle_version = '4.0.0'
 
     leakcanary = '1.6.2'
     leakcanary_nopo = '1.6.1'
-    glide = '4.10.0'
+    glide = '4.11.0'
     arouter_api = '1.5.0'
     arouter_compiler = '1.2.2'
     arouter_register = '1.0.2'

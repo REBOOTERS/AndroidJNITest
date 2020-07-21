@@ -32,7 +32,7 @@ open class BaseActivity : AppCompatActivity() {
     protected var mHasPermission: Boolean = false
     protected lateinit var mContext: Context
 
-    protected var revertedlUrl: Uri? = null
+    protected var revertedUrl: Uri? = null
     protected var originalUrl: Uri? = null
 
     lateinit var activityDelegate: ActivityDelegate
@@ -78,8 +78,8 @@ open class BaseActivity : AppCompatActivity() {
                     genGifFromImages(uris)
                 }
                 VIDEO_REQUEST_CODE -> {
-                    val uri = Matisse.obtainResult(data)[0]
-                    genGifFromVideo(uri)
+                    val uri = Matisse.obtainPathResult(data)[0]
+                    genGifFromVideo(Uri.parse(uri))
                 }
             }
         }

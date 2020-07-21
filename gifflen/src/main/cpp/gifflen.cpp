@@ -53,18 +53,15 @@ FILE *pGif = NULL;
 
 extern "C"
 {
-JNIEXPORT jint JNICALL Java_com_engineer_cpluspluslite_Gifflen_init(JNIEnv *ioEnv, jobject ioThis,
+JNIEXPORT jint JNICALL Java_com_engineer_android_gifflen_Gifflen_init(JNIEnv *ioEnv, jobject ioThis,
                                                                     jstring gifName,
                                                                     jint w, jint h, jint numColors,
                                                                     jint quality, jint frameDelay);
-JNIEXPORT void JNICALL Java_com_engineer_cpluspluslite_Gifflen_close(JNIEnv *ioEnv, jobject ioThis);
+JNIEXPORT void JNICALL Java_com_engineer_android_gifflen_Gifflen_close(JNIEnv *ioEnv, jobject ioThis);
 JNIEXPORT jint JNICALL
-Java_com_engineer_cpluspluslite_Gifflen_addFrame(JNIEnv *ioEnv, jobject ioThis,
+Java_com_engineer_android_gifflen_Gifflen_addFrame(JNIEnv *ioEnv, jobject ioThis,
                                                  jintArray inArray);
-
-JNIEXPORT jstring JNICALL Java_com_engineer_cpluspluslite_ui_MainActivity_stringFromJNI(JNIEnv *env,
-                                                                                     jobject ioThis/* this */);
-};
+}
 
 //        {
 //    std::string hello = "Hello from C++";
@@ -86,13 +83,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     return JNI_VERSION_1_4;
 }
 
-JNIEXPORT jstring  JNICALL Java_com_engineer_cpluspluslite_ui_MainActivity_stringFromJNI(JNIEnv *env,
-                                                                                      jobject ioThis/* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
-}
-
-JNIEXPORT jint JNICALL Java_com_engineer_cpluspluslite_Gifflen_init(JNIEnv *ioEnv, jobject ioThis,
+JNIEXPORT jint JNICALL Java_com_engineer_android_gifflen_Gifflen_init(JNIEnv *ioEnv, jobject ioThis,
                                                                     jstring gifName,
                                                                     jint w, jint h, jint numColors,
                                                                     jint quality, jint frameDelay) {
@@ -159,7 +150,7 @@ JNIEXPORT jint JNICALL Java_com_engineer_cpluspluslite_Gifflen_init(JNIEnv *ioEn
 
 
 JNIEXPORT void JNICALL
-Java_com_engineer_cpluspluslite_Gifflen_close(JNIEnv *ioEnv, jobject ioThis) {
+Java_com_engineer_android_gifflen_Gifflen_close(JNIEnv *ioEnv, jobject ioThis) {
     if (data32bpp) {
         delete[] data32bpp;
         data32bpp = NULL;
@@ -188,7 +179,7 @@ Java_com_engineer_cpluspluslite_Gifflen_close(JNIEnv *ioEnv, jobject ioThis) {
 
 
 JNIEXPORT jint JNICALL
-Java_com_engineer_cpluspluslite_Gifflen_addFrame(JNIEnv *ioEnv, jobject ioThis, jintArray inArray) {
+Java_com_engineer_android_gifflen_Gifflen_addFrame(JNIEnv *ioEnv, jobject ioThis, jintArray inArray) {
     //把上层的像素数组inArray,复制到inDIB.bits暂存区域内.(start=0, len=width*height)
     ioEnv->GetIntArrayRegion(inArray, (jint) 0, (jint) (inDIB.width * inDIB.height),
                              (jint *) (inDIB.bits));
@@ -996,4 +987,3 @@ void NeuQuant::learn() {
     sprintf(s, "final alpha = %f", ((float) alpha) / initalpha);
     __android_log_write(ANDROID_LOG_VERBOSE, "com_lchad_gifflen", s);
 }
-

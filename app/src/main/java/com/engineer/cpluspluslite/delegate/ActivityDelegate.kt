@@ -69,7 +69,7 @@ class ActivityDelegate(private val context: Activity) {
     fun share(originalUrl: Uri?, revertedUrl: Uri?) {
         if (revertedUrl != null) {
             val shareIntent = ShareCompat.IntentBuilder.from(context)
-                    .addStream(originalUrl)
+                    .addStream(originalUrl!!)
                     .addStream(revertedUrl)
                     .setText("反转 gif")
                     .setType("image/gif")
