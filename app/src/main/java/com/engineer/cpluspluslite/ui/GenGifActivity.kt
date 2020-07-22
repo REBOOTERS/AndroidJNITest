@@ -83,10 +83,6 @@ class GenGifActivity : BaseActivity() {
 
     override fun genGifFromVideo(uri: Uri) {
         super.genGifFromVideo(uri)
-        val path = activityDelegate.providePath("fly")
-        val videoTo = VideoToFrames(path)
-        val bitmaps = videoTo.genFramesformFromVideo(uri, 0, 5 , 5 * 1000)
-
         lists.visibility = View.GONE
         video_container.visibility = View.VISIBLE
 
