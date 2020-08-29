@@ -1,8 +1,8 @@
 ext {
     compileSdkVersion = 29
-    buildToolsVersion = '30.0.0'
+    buildToolsVersion = '30.0.2'
     minSdkVersion = 21
-    targetSdkVersion = 28
+    targetSdkVersion = 29
 
     support_versioin = '1.0.0'
     support_versioin_appcompat = '1.1.0'
