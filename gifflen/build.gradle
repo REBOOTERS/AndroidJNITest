@@ -7,7 +7,7 @@ def ext = rootProject.ext
 android {
     compileSdkVersion ext.compileSdkVersion
     buildToolsVersion ext.buildToolsVersion
-
+    ndkVersion '21.3.6528147'
     defaultConfig {
         minSdkVersion ext.minSdkVersion
         targetSdkVersion ext.targetSdkVersion
