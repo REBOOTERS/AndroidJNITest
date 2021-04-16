@@ -1,5 +1,5 @@
 //
-// Created by zhuyongging on 2020/7/12.
+// Created by Rookie on 2020/7/12.
 //
 #ifndef CPLUSPLUSLITE_UTIL_H
 #define CPLUSPLUSLITE_UTIL_H

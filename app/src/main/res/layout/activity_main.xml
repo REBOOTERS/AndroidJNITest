@@ -15,8 +15,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:text="Hello Native!"
-        android:textSize="23sp"
-        android:textStyle="bold" />
+        android:textSize="23sp" />
 
     <Button
         android:id="@+id/gen"
@@ -25,8 +24,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="Gen Gif"
-        android:textSize="23sp"
-        android:textStyle="bold" />
+        android:textSize="23sp" />
 
     <Button
         android:id="@+id/reverse"
@@ -35,7 +33,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="Reverse Gif"
-        android:textSize="23sp"
-        android:textStyle="bold" />
+        android:textSize="23sp" />
 
 </LinearLayout>
